@@ -12,12 +12,17 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
+
+import com.qa.constants.Constants;
 import com.qa.domain.Trainee;
+import com.qa.service.business.TraineeService;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
 @Default
 public class TraineeDBRepository implements TraineeRepository {
+	private static final Logger LOGGER = Logger.getLogger(TraineeService.class);
 
 	@PersistenceContext(unitName = "primary")
 	private EntityManager manager;
@@ -32,35 +37,36 @@ public class TraineeDBRepository implements TraineeRepository {
 		return util.getJSONForObject(trainees);
 	}
 
-	@Override
-	@Transactional(REQUIRED)
-	public String createTrainee(String trainee) {
-		Trainee aTrainee = util.getObjectForJSON(trainee, Trainee.class);
-		manager.persist(aTrainee);
-		return "{\"message\": \"trainee has been sucessfully added\"}";
-	}
-
-	@Override
-	@Transactional(REQUIRED)
-	public String updateTrainee(Long id, String traineeToUpdate) {
-		Trainee updatedTrainee = util.getObjectForJSON(traineeToUpdate, Trainee.class);
-		Trainee traineeFromDB = findTrainee(id);
-		if (traineeToUpdate != null) {
-			traineeFromDB = updatedTrainee;
-			manager.merge(traineeFromDB);
-		}
-		return "{\"message\": \"trainee sucessfully updated\"}";
-	}
-
-	@Override
-	@Transactional(REQUIRED)
-	public String deleteTrainee(Long id) {
-		Trainee traineeInDB = findTrainee(id);
-		if (traineeInDB != null) {
-			manager.remove(traineeInDB);
-		}
-		return "{\"message\": \"trainee sucessfully deleted\"}";
-	}
+//	@Override
+//	@Transactional(REQUIRED)
+//	public String createTrainee(String trainee) {
+//		Trainee aTrainee = util.getObjectForJSON(trainee, Trainee.class);
+//		manager.persist(aTrainee);
+//		return Constants.ACCOUNT_ADDED;
+//	}
+//
+//	@Override
+//	@Transactional(REQUIRED)
+//	public String updateTrainee(Long id, String traineeToUpdate) {
+//		LOGGER.info("In traineeDBRepo updatetrainee");
+//		Trainee updatedTrainee = util.getObjectForJSON(traineeToUpdate, Trainee.class);
+//		Trainee traineeFromDB = findTrainee(id);
+//		if (traineeToUpdate != null) {
+//			traineeFromDB = updatedTrainee;
+//			manager.merge(traineeFromDB);
+//		}
+//		return Constants.ACCOUNT_UPDATED;
+//	}
+//
+//	@Override
+//	@Transactional(REQUIRED)
+//	public String deleteTrainee(Long id) {
+//		Trainee traineeInDB = findTrainee(id);
+//		if (traineeInDB != null) {
+//			manager.remove(traineeInDB);
+//		}
+//		return Constants.ACCOUNT_DELETED;
+//	}
 
 	private Trainee findTrainee(Long id) {
 		return manager.find(Trainee.class, id);
