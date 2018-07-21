@@ -27,27 +27,27 @@ public class TraineeEndpoint {
 		return traineeService.getAllTrainees();		
 	}
 	
-//	@POST
-//	@Path("/json")
-//	@Produces({"application/json"})
-//	public String addTrainee(String trainee) {
-//		return traineeService.addTrainee(trainee);
-//	}
-//	
-//	@PUT
-//	@Path("/json/{id}")
-//	@Produces({"application/json"})
-//	public String updateTrainee(@PathParam("id") Long id, String trainee) {
-//		LOGGER.info("In traineeEndpoint updatetrainee");
-//		return traineeService.updateTrainee(id, trainee);
-//	}
-//	
-//	@DELETE
-//	@Path("/json/{id}")
-//	@Produces({"application/json"})
-//	public String deleteTrainee(@PathParam("id") Long id) {
-//		return traineeService.deleteTrainee(id);
-//	}
+	@POST
+	@Path("/json")
+	@Produces({"application/json"})
+	public String addTrainee(String trainee) {
+		return traineeService.addTrainee(trainee);
+	}
+	
+	@PUT
+	@Path("/json/{id}")
+	@Produces({"application/json"})
+	public String updateTrainee(@PathParam("id") Long id, String trainee) {
+		LOGGER.info("In traineeEndpoint updatetrainee");
+		return traineeService.updateTrainee(id, trainee);
+	}
+	
+	@DELETE
+	@Path("/json/{id}")
+	@Produces({"application/json"})
+	public String deleteTrainee(@PathParam("id") Long id) {
+		return traineeService.deleteTrainee(id);
+	}
 	
 	public void setTraineeService(TraineeService traineeService) {
 		this.traineeService = traineeService;
