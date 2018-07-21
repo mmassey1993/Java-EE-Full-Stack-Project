@@ -37,36 +37,36 @@ public class TraineeDBRepository implements TraineeRepository {
 		return util.getJSONForObject(trainees);
 	}
 
-//	@Override
-//	@Transactional(REQUIRED)
-//	public String createTrainee(String trainee) {
-//		Trainee aTrainee = util.getObjectForJSON(trainee, Trainee.class);
-//		manager.persist(aTrainee);
-//		return Constants.ACCOUNT_ADDED;
-//	}
-//
-//	@Override
-//	@Transactional(REQUIRED)
-//	public String updateTrainee(Long id, String traineeToUpdate) {
-//		LOGGER.info("In traineeDBRepo updatetrainee");
-//		Trainee updatedTrainee = util.getObjectForJSON(traineeToUpdate, Trainee.class);
-//		Trainee traineeFromDB = findTrainee(id);
-//		if (traineeToUpdate != null) {
-//			traineeFromDB = updatedTrainee;
-//			manager.merge(traineeFromDB);
-//		}
-//		return Constants.ACCOUNT_UPDATED;
-//	}
-//
-//	@Override
-//	@Transactional(REQUIRED)
-//	public String deleteTrainee(Long id) {
-//		Trainee traineeInDB = findTrainee(id);
-//		if (traineeInDB != null) {
-//			manager.remove(traineeInDB);
-//		}
-//		return Constants.ACCOUNT_DELETED;
-//	}
+	@Override
+	@Transactional(REQUIRED)
+	public String createTrainee(String trainee) {
+		Trainee aTrainee = util.getObjectForJSON(trainee, Trainee.class);
+		manager.persist(aTrainee);
+		return Constants.ACCOUNT_ADDED;
+	}
+
+	@Override
+	@Transactional(REQUIRED)
+	public String updateTrainee(Long id, String traineeToUpdate) {
+		LOGGER.info("In traineeDBRepo updatetrainee");
+		Trainee updatedTrainee = util.getObjectForJSON(traineeToUpdate, Trainee.class);
+		Trainee traineeFromDB = findTrainee(id);
+		if (traineeToUpdate != null) {
+			traineeFromDB = updatedTrainee;
+			manager.merge(traineeFromDB);
+		}
+		return Constants.ACCOUNT_UPDATED;
+	}
+
+	@Override
+	@Transactional(REQUIRED)
+	public String deleteTrainee(Long id) {
+		Trainee traineeInDB = findTrainee(id);
+		if (traineeInDB != null) {
+			manager.remove(traineeInDB);
+		}
+		return Constants.ACCOUNT_DELETED;
+	}
 
 	private Trainee findTrainee(Long id) {
 		return manager.find(Trainee.class, id);

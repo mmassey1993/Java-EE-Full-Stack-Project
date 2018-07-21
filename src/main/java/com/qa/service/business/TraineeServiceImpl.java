@@ -18,22 +18,22 @@ public class TraineeServiceImpl implements TraineeService{
 		return repo.getAllTrainees();
 	}
 
-//	@Override
-//	public String addTrainee(String trainee) {
-//		return repo.createTrainee(trainee);
-//	}
-//
-//	@Override
-//	public String updateTrainee(Long id, String trainee) {
-//		LOGGER.info("In TraineeServiceImpl updatetrainee ");
-//		return repo.updateTrainee(id, trainee);
-//	}
-//
-//	@Override
-//	public String deleteTrainee(Long id) {
-//		return repo.deleteTrainee(id);
-//
-//	}
+	@Override
+	public String addTrainee(String trainee) {
+		return repo.createTrainee(trainee);
+	}
+
+	@Override
+	public String updateTrainee(Long id, String trainee) {
+		LOGGER.info("In TraineeServiceImpl updatetrainee ");
+		return repo.updateTrainee(id, trainee);
+	}
+
+	@Override
+	public String deleteTrainee(Long id) {
+		return repo.deleteTrainee(id);
+
+	}
 
 	public void setRepo(TraineeRepository repo) {
 		this.repo = repo;
